@@ -1,14 +1,39 @@
 var altura = 0
 var largura = 0
-var vida = 1
+var vidas = 1
+var tempo = 15
 
+var criaMosquitoTempo = 1500
 
-function AjustarTamanhoDoPalco(){
-    altura = window.innerHeight;
-    largura = window.innerWidth
-    console.log(altura, largura)
+var nivel = window.location.search
+nivel = nivel.replace("?", '')
+
+if(nivel === "normal"){
+    criaMosquitoTempo = 1500
 }
-AjustarTamanhoDoPalco();
+else if(nivel === "dificil"){
+    criaMosquitoTempo = 1000
+}
+else if(nivel === "chucknorris"){
+    criaMosquitoTempo  = 750
+}
+function AjustarTamanhoDoPalco(){
+    altura = window.innerHeight
+    largura = window.innerWidth
+}
+AjustarTamanhoDoPalco()
+var cronometro = setInterval(function(){
+    tempo -= 1 
+
+    if(tempo < 0){
+        clearInterval(cronometro)
+        clearInterval(CriaMosca)
+        window.location.href = "vitoria.html"
+    }
+    else{
+        document.getElementById("cronometro").innerHTML = tempo
+    }
+}, criaMosquitoTempo)
 function PosicaoRandomica(){
     if(document.getElementById("mosquito")){
     document.getElementById("mosquito").remove()
@@ -17,21 +42,18 @@ function PosicaoRandomica(){
         window.location.href = "fim_de_jogo.html"
         }
         else{
-        document.getElementById("v" + vidas).scr = "imagens/coracao_vazio.png"
-        vida++
-        }
-
-    }
+        document.getElementById('v' + vidas).src="imagens/coracao_vazio.png"
+        vidas++
+         }
+     }
     var posicaox = Math.floor(Math.random() * largura) - 90
     var posicaoy = Math.floor(Math.random() * altura) - 90
 
     posicaox = posicaox < 0 ? 0 : posicaox
     posicaoy = posicaoy < 0 ? 0 : posicaoy
 
-    console.log(posicaoy, posicaox)
-
     var mosquito = document.createElement("img")
-    mosquito.src = "imagens/mosca.png"
+    mosquito.src = "imagens/mosquito.png"
     mosquito.className = tamanhoAleatorio() + " " + ladoAleatorio()
     mosquito.style.left = posicaox + "px"
     mosquito.style.top = posicaoy + "px"

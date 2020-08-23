@@ -8,11 +8,21 @@
             <script src="script.js"></script>
         </head>
         <body onresize="AjustarTamanhoDoPalco()">
+            <div class="painel">
+                <div class="vidas">
+                    <img id="v1" src="imagens/coracao_cheio.png"/>
+                    <img id="v2" src="imagens/coracao_cheio.png"/>
+                    <img id="v3" src="imagens/coracao_cheio.png"/>
+                </div>
+                <div class="cronometro">Tempo restante: <span id="cronometro"></span></div>
+            </div>
+            
             <script>
-                document.getElementById("cronometro").innerHTML = tempo
+                document.getElementById("cronometro").innerHTML = tempo 
+
                     var CriaMosca = setInterval(function(){
                         PosicaoRandomica()
-                    }, CriaMosquitoTempo);
+                    }, criaMosquitoTempo);
             </script>
         </body>
 
